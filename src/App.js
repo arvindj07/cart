@@ -1,10 +1,13 @@
+import React from 'react';
+import CartItem from './CartItem';
 
+//The Root Component- App
+//Creating Function-Based component
 function App() {
   return (
     <div className="App">
-      <h1>
-        Cart
-      </h1>
+      {/* Calling CartItem Component  */}
+      <CartItem />
     </div>
   );
 }
