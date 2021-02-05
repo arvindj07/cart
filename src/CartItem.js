@@ -7,8 +7,8 @@ class CartItem extends React.Component{
   constructor(){
     //Calling constructor of react.Component class
     super();
-//State: its a way to store local data, for that particular component, its a js object
-//Setup defailt state
+    //State: its a way to store local data, for that particular component, its a js object
+    //Setup defailt state
     this.state={
       price:9999,
       title:'Mobile Phone',
@@ -16,6 +16,14 @@ class CartItem extends React.Component{
       img:'',
     }
 
+    //binding in constructor
+    // this.increaseQuantity=this.increaseQuantity.bind(this);
+    //Or we can use 'increaseQuantity' as an ARROW FUNCTION
+  }
+
+  //ARROW FUNC
+  increaseQuantity= () => {
+    console.log('this.state',this.state);
   }
 
   //for a class component to be a react component we have to use render() method
@@ -27,8 +35,8 @@ class CartItem extends React.Component{
     return (
       <div className="cart-item">
         <div className="left-block">
-    {/* image tag in jsx is like this- <img /> */}
-    {/* In-line Styling of elements using Object ie, {styles} */}
+          {/* image tag in jsx is like this- <img /> */}
+          {/* In-line Styling of elements using Object ie, {styles} */}
           <img style={styles.image} />
         </div>
         <div className="right-block">
@@ -38,9 +46,20 @@ class CartItem extends React.Component{
           <div className="cart-item-actions">
             {/* {Buttons} */}
             {/* getting icon imge-address from Flaticons Site  */}
-            <img alt="increase" className="action-icons" src="https://www.flaticon.com/svg/vstatic/svg/992/992651.svg?token=exp=1612545050~hmac=47108d1b2af15f5c08db3abdb5033d69" />
-            <img alt="decrease" className="action-icons" src="https://www.flaticon.com/svg/vstatic/svg/992/992683.svg?token=exp=1612545014~hmac=e39a3964cd463671c148273783e2b528" />
-            <img alt="delete" className="action-icons" src="https://www.flaticon.com/svg/vstatic/svg/446/446046.svg?token=exp=1612545077~hmac=d290e6508831824f405e1a657e31f55a" />
+            <img 
+              alt="increase" 
+              className="action-icons" 
+              src="https://www.flaticon.com/svg/vstatic/svg/992/992651.svg?token=exp=1612545050~hmac=47108d1b2af15f5c08db3abdb5033d69" 
+              //u can do this to bind-> onClick={this.increaseQuantity.bind(this)} or do the binding in constructor
+              onClick={this.increaseQuantity} /> 
+            <img 
+              alt="decrease" 
+              className="action-icons" 
+              src="https://www.flaticon.com/svg/vstatic/svg/992/992683.svg?token=exp=1612545014~hmac=e39a3964cd463671c148273783e2b528" />
+            <img 
+              alt="delete" 
+              className="action-icons" 
+              src="https://www.flaticon.com/svg/vstatic/svg/446/446046.svg?token=exp=1612545077~hmac=d290e6508831824f405e1a657e31f55a" />
           </div>
         </div>
       </div>
