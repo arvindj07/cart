@@ -1,5 +1,5 @@
 import React from 'react';
-import CartItem from './CartItem';
+import CartItem from './CartItem'; //Importing CartItem component
 
 //The Root Component- App
 //Creating Function-Based component
