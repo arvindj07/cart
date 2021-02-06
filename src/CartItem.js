@@ -19,13 +19,44 @@ class CartItem extends React.Component{
     //binding in constructor
     // this.increaseQuantity=this.increaseQuantity.bind(this);
     //Or we can use 'increaseQuantity' as an ARROW FUNCTION
+
+    // this.testing();
   }
+
+  //To show that setState() is synchornous in Api calls
+  // testing () {
+  //   //We r using promise to simulate an Api call
+  //   const promise=new Promise((resolve,reject)=>{
+  //     setTimeout(() => {
+  //       resolve('done');
+  //     }, 5000);
+  //   })
+
+  //   promise.then(()=>{
+  //     //setState acts like synchronous call here
+  //     this.setState({
+  //       qty:this.state.qty+10,
+  //     });
+
+  //     this.setState({
+  //       qty:this.state.qty+10,
+  //     });
+
+  //     this.setState({
+  //       qty:this.state.qty+10,
+  //     });
+
+  //     console.log('state',this.state);
+  //   });
+
+  // }
 
   //ARROW FUNC To Increase quantity
   increaseQuantity= () => {
     // console.log('this.state',this.state);
 
     //setState() is a func inherited from React.Component
+    //setState() is asynchronous
     //setState() helps to re-render our component with the updated value
     //i.e, this.state.qty+=1 will only update the value, but not re-render it,so the updated value wont be visible on the page until its refreshed/re-rendered, so we use setState() func
 
@@ -40,13 +71,32 @@ class CartItem extends React.Component{
       return{
         qty:prevState.qty+1,
       }
+    },()=>{  //as setState() is asynchronous,we can call a func like this to execute it after a prevState func is executed
+      console.log("this.state",this.state);
     });
+    
+    // BATCHING
+    //In the Form-1 of setState() func, Batching takes place
+    //Batching- In this, even if we make multiple setState calls, React will combine all these calls to one setState() call, so that our App is efficient by re-rendering the component only once
+    // i.e, While making multiple setState() calls, React only takes the last call into consideration
+
+    //In the Form-2 of setState() func, Batching takes place,i.e, component is only re-rendered once, but
+    //the each of the callback funnctions will get executed bcoz it get queued up and gets executed one-by-one, and due to the prevState the state will also get updated each time
+
+    //DRWABACK OF BATCHING: 
+    //outside  of eventHandlers ,React doesnt perform Batching, and here setState() call is synchronous call
 
   }
 
+  // Arrow func to Decrease Qty
   decreaseQuantity= () => {
+    const {qty} = this.state;
+      
+    if(qty==0){
+      return;
+    }
+
     this.setState((prevState)=>{
-      if(prevState.qty>0)
       return {
         qty:prevState.qty-1,
       }
@@ -58,7 +108,8 @@ class CartItem extends React.Component{
   render(){
     // const {price,title,qty,img} this is called Object re-structuring
     const {price,title,qty,img}= this.state;
-    
+
+    // console.log('render');
     return (
       <div className="cart-item">
         <div className="left-block">
