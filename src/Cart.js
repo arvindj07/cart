@@ -1,6 +1,8 @@
 import React from 'react';
 import CartItem from './CartItem'; //Importing CartItem component
 
+//Creating a component called - Cart
+//Creating Class-Based component
 class Cart extends React.Component{ 
 
   //Constructor
