@@ -1,5 +1,5 @@
 import React from 'react';
-import CartItem from './CartItem'; //Importing CartItem component
+import Cart from './Cart';
 
 //The Root Component- App
 //Creating Function-Based component
@@ -7,7 +7,8 @@ function App() {
   return (
     <div className="App">
       {/* Calling CartItem Component  */}
-      <CartItem />
+      {/* <CartItem /> */}
+      <Cart />
     </div>
   );
 }

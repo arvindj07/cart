@@ -103,7 +103,7 @@ class CartItem extends React.Component{
     })
   };
 
-  //for a class component to be a react component we have to use render() method
+  //for a class component to be converted into a react component we have to use render() method
   // and render() returns JSX which describes the UI for the user
   render(){
     // const {price,title,qty,img} this is called Object re-structuring
@@ -113,7 +113,7 @@ class CartItem extends React.Component{
     return (
       <div className="cart-item">
         <div className="left-block">
-          {/* image tag in jsx is like this- <img /> */}
+          {/* image tag in jsx is like this-  <img /> */}
           {/* In-line Styling of elements using Object ie, {styles} */}
           <img style={styles.image} />
         </div>
