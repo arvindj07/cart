@@ -69,18 +69,30 @@ class Cart extends React.Component{
     })
   }
 
+  //Deleting a Product Component using Product id 
+  handleDeleteProduct= (id)=>{
+    const {products}=this.state;
+
+    const items = products.filter((item)=> item.id!=id); //Returns the elements of an array that meet the condition 
+                                                          //specified in a callback function.
+    this.setState({
+      products:items,
+    });
+  }
+
   render(){
     const {products} = this.state;
     return (
       <div className="cart">
         
-        {products.map( (product)=>{
+        {products.map( (product)=>{ //Looping through all the objects in products array and Displaying it as Component
           return (
             <CartItem               //We can pass data from Parent(i.e, Cart) to Child(i.e,CartItem) using PROPS
-              product={product}     //'product' is a prop
+              product={product}     //'product' is a Passed as a Prop
               key={product.id}      // specifying 'key' to differntiate bw each CartItem component passed
-              onIncreaseQuantity={this.handleIncreaseQuantity}  //increase Qty func
-              onDecreaseQuantity={this.handleDecreaseQuantity}  //decrease Qty func
+              onIncreaseQuantity={this.handleIncreaseQuantity}  //Increase Qty func
+              onDecreaseQuantity={this.handleDecreaseQuantity}  //Decrease Qty func
+              onDeleteProduct={this.handleDeleteProduct}        //Delete Product
             />
           )
         } )}

@@ -9,8 +9,13 @@ class CartItem extends React.Component{
   // and render() returns JSX which describes the UI for the user
   render(){
     // const {price,title,qty,img} this is called Object re-structuring
-    const {price,title,qty,img}= this.props.product;
-
+    const {price,title,qty,img}= this.props.product;  //NOTE:Props cant be changed inside the component
+    const {
+        product,
+        onIncreaseQuantity,
+        onDecreaseQuantity,
+        onDeleteProduct
+      } = this.props;
     // console.log(this.props);
     return (
       <div className="cart-item">
@@ -31,16 +36,17 @@ class CartItem extends React.Component{
               className="action-icons" 
               src="https://www.flaticon.com/svg/vstatic/svg/1828/1828926.svg?token=exp=1612630193~hmac=24b706a63bd2ee51341d706718729e53" 
               //here , the callback func is calling the func in Cart Component ,passed via Props
-              onClick={() => this.props.onIncreaseQuantity(this.props.product)} />  
+              onClick={() => onIncreaseQuantity(product)} />  
             <img 
               alt="decrease" 
               className="action-icons" 
               src="https://www.flaticon.com/svg/vstatic/svg/992/992683.svg?token=exp=1612630231~hmac=c33b25645db86852b7be52406ccf0b5b" 
-              onClick={() => this.props.onDecreaseQuantity(this.props.product)} />
+              onClick={() => onDecreaseQuantity(product)} />
             <img 
               alt="delete" 
               className="action-icons" 
-              src="https://www.flaticon.com/svg/vstatic/svg/446/446046.svg?token=exp=1612630253~hmac=d00d4f290bd57f4696bb3af19ee957b1" />
+              src="https://www.flaticon.com/svg/vstatic/svg/446/446046.svg?token=exp=1612630253~hmac=d00d4f290bd57f4696bb3af19ee957b1" 
+              onClick={()=>onDeleteProduct(product.id)}/>  
           </div>
         </div>
       </div>
