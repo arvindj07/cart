@@ -16,21 +16,21 @@ class App extends React.Component {
           price:99,
           title:'Watch',
           qty:4,
-          img:'',
+          img:'https://images.unsplash.com/photo-1495857000853-fe46c8aefc30?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MjB8fHdhdGNofGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
           id:1,
         },
         {
           price:999,
           title:'Mobile Phone',
           qty:10,
-          img:'',
+          img:'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8bW9iaWxlJTIwcGhvbmV8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
           id:2,
         },
         {
           price:2399,
           title:'Laptop',
           qty:1,
-          img:'',
+          img:'https://images.unsplash.com/photo-1541807084-5c52b6b3adef?ixid=MXwxMjA3fDB8MHxzZWFyY2h8OHx8bGFwdG9wfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
           id:3,
         }
       ]
@@ -80,7 +80,7 @@ class App extends React.Component {
     });
   }
 
-  getCount= ()=>{
+  getCartCount= ()=>{
     const {products} = this.state;
 
     let count=0;
@@ -94,12 +94,24 @@ class App extends React.Component {
                     //Dec-prod func will re-render this App Component and This func(i.e,getCount) will be called again while passing Props(i.e,count) in NAVBAR Component
   }
 
+  getCartTotal= ()=>{
+    const {products} = this.state;
+    let cartTotal=0;
+
+    //Another way of Looping through Products Array
+    products.map((product)=>{
+      cartTotal+=product.qty*product.price;
+    })
+
+    return cartTotal;
+  }
+
   render(){
     const {products}=this.state;      // Object De-structuring 
     return (
       <div className="App">
         <Navbar 
-          count={this.getCount()} //We r not passing the func here,instead, we r calling the func and returning the result
+          count={this.getCartCount()} //We r not passing the func here,instead, we r calling the func and returning the result
         />  
         <Cart
           products= {products}                              //Array of products
@@ -107,6 +119,7 @@ class App extends React.Component {
           onDecreaseQuantity={this.handleDecreaseQuantity}  //Decrease Qty func
           onDeleteProduct={this.handleDeleteProduct}        //Delete Product
         />
+        <div style={{padding:10, fontSize:20}}>Total: {this.getCartTotal()}</div>
       </div>
     );
   }
