@@ -3,26 +3,7 @@ import React from 'react';
 //Creating a component called - Cartitem
 //Creating Class-Based component
 class CartItem extends React.Component{
-  //Constructor
-  constructor(){
-    //Calling constructor of react.Component class
-    super();
-    //State: its a way to store local data, for that particular component, its a js object
-    //Setup default state
-    this.state={
-      price:999,
-      title:'Mobile Phone',
-      qty:1,
-      img:'',
-    }
-
-    //binding in constructor
-    // this.increaseQuantity=this.increaseQuantity.bind(this);
-    //Or we can use 'increaseQuantity' as an ARROW FUNCTION
-
-    // this.testing();
-  }
-
+  
   //To show that setState() is synchornous in Api calls
   // testing () {
   //   //We r using promise to simulate an Api call
@@ -107,9 +88,9 @@ class CartItem extends React.Component{
   // and render() returns JSX which describes the UI for the user
   render(){
     // const {price,title,qty,img} this is called Object re-structuring
-    const {price,title,qty,img}= this.state;
+    const {price,title,qty,img}= this.props.product;
 
-    // console.log('render');
+    // console.log(this.props);
     return (
       <div className="cart-item">
         <div className="left-block">
@@ -118,7 +99,7 @@ class CartItem extends React.Component{
           <img style={styles.image} />
         </div>
         <div className="right-block">
-          <div style={{ fontSize:25 }}>{this.state.title}</div>
+          <div style={{ fontSize:25 }}>{title}</div>
           <div style={{ color: '#777' }}>Rs {price}</div>
           <div style={{ color: '#777' }}>Qty: {qty}</div>
           <div className="cart-item-actions">
