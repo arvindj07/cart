@@ -37,6 +37,38 @@ class Cart extends React.Component{
 
   }
 
+  // Func to Increase Qty of an Item
+  //This func is passed to CartItem via Props and CartItem will raise a call onClick of increase button/link
+  handleIncreaseQuantity = (product) =>{
+    // console.log('hey , Increase quantity of ', product);
+    const {products} = this.state;
+    const index=products.indexOf(product);//to get the idx of product(that has been passed frm CartItem) within 
+                                          //'products' array in this.state
+
+    products[index].qty+=1;
+
+    //Used to re-render the Component, So that the increase in Qty is reflected on Browser
+    this.setState({
+      // products:products,  // this can be also written as below in shorthand as both have same name   
+      products
+    })
+  }
+
+  //Decrease Qty of Item
+  handleDecreaseQuantity = (product) =>{
+    const {products} = this.state;
+    const index=products.indexOf(product);
+
+    if(products[index].qty==0){
+      return;
+    }
+    products[index].qty-=1;
+
+    this.setState({
+      products:products,  
+    })
+  }
+
   render(){
     const {products} = this.state;
     return (
@@ -44,9 +76,11 @@ class Cart extends React.Component{
         
         {products.map( (product)=>{
           return (
-            <CartItem 
-              product={product} 
-              key={product.id} 
+            <CartItem               //We can pass data from Parent(i.e, Cart) to Child(i.e,CartItem) using PROPS
+              product={product}     //'product' is a prop
+              key={product.id}      // specifying 'key' to differntiate bw each CartItem component passed
+              onIncreaseQuantity={this.handleIncreaseQuantity}  //increase Qty func
+              onDecreaseQuantity={this.handleDecreaseQuantity}  //decrease Qty func
             />
           )
         } )}
